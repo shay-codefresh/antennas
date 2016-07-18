@@ -6,7 +6,9 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash-node": "3.10.2"
+  },
   "engine": "node 5.7.1",
   "devDependencies": {},
   "scripts": {
