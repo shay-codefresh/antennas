@@ -3,6 +3,12 @@ var express = require('express');
 var app = express();
 
 app.get('/api/containers', function (req, res) {
+    var got=req.query.method;
+    var method2 = 'callback';
+    if(got == "'promise'"){
+       method2='promise';
+    }
+console.log(method2);
     var fs =require("fs");
     var filename = "containers.json";
     var filesj= fs.readFileSync(filename);
