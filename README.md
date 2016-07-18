@@ -1,2 +1,1 @@
-# test
-# test
+$ npm set set init-author

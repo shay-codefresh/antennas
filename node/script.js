@@ -1,8 +1,9 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function (req, res) {
+app.get('/api/containers', function (req, res) {
     res.send('Hello World');
+    return [,];
 })
 
 var server = app.listen(8081, function () {
