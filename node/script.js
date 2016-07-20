@@ -1,39 +1,33 @@
 var _ = require('lodash-node');
 var express = require('express');
 var app = express();
+var tools = require('./functions.js')
+//   var fs = require("fs");
+var filename = "containerss.json"
 
-app.get('/api/containers', function (req, res) {
-    var got=req.query.method;
-    var method2 = 'callback';
-    if(got == "'promise'"){
-       method2='promise';
+app.get('/api/containers', function (request, response) {
+
+    var method = 'callback';
+    if (request.query.method == "promise") {
+        method = 'promise';
     }
-console.log(method2);
-    var fs =require("fs");
-    var filename = "containers.json";
-    var filesj= fs.readFileSync(filename);
-var containers =JSON.parse(filesj);
-    //console.log("Output Content : \n"+ array);
-    var array=[];
+    //console.log(method);
 
-    for(var container in containers ){
-            array.push(new Date(containers[container].created));
-    }
-if(typeof USE_LODASH =="undefined")
-    array.sort(function (date1, date2) {
-        if (date1 > date2) return 1;
-        if (date1 < date2) return -1;
-        return 0;
-    });
-else {
-        array=_.sortBy(array,function (value){
-            console.log(value.getTime());
-            return value.getTime();
 
+    if (method == 'callback') {
+        tools.myread(filename, function (error, data) {
+            if (error) {
+                return response.status(500).send(error.message);
+            }
+            else {
+                response.send(data);
+            }
         })
+
+
     }
-    res.send(array);
 });
+
 
 var server = app.listen(8081, function () {
     var host = server.address().address;
