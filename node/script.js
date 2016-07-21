@@ -3,12 +3,13 @@ var express = require('express');
 var app = express();
 var tools = require('./functions.js')
 //   var fs = require("fs");
-var filename = "containerss.json"
+var filename = "containers.json";
 
 app.get('/api/containers', function (request, response) {
 
     var method = 'callback';
-    if (request.query.method == "promise") {
+    if (request.query.method == "promise")
+    {
         method = 'promise';
     }
     //console.log(method);
