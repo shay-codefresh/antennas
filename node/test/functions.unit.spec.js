@@ -14,8 +14,8 @@ describe("functions tests", function () {
 
         describe("positive", function () {
 
-            it("should return an array of containers", function(done){
-                tools.myread("/containers.json", function(err, res){
+            it("should return an array of containers with amount of 5", function (done) {
+                tools.myread("/containers.json", function (err, res) {
                     if (err) {
                         return done(err);
                     }
@@ -25,29 +25,80 @@ describe("functions tests", function () {
                         done();
                     }
                 });
-
             });
 
-            it("should return the containers sorted by date", function(done){
-                tools.myread("/containers.json", function(err, res){
+                it("should return an array of containers with amount of 3", function (done) {
+                    tools.myread("/containers2.json", function (err, res) {
+                        if (err) {
+                            return done(err);
+                        }
+                        else {
+                            expect(res).to.be.instanceof(Array);
+                            expect(res.length).to.equal(3);
+                            done();
+                        }
+                    });
+            });
+
+            it("should return the 5 containers sorted by date ", function (done) {
+                tools.myread("/containers.json", function (err, res) {
                     if (err) {
                         return done(err);
                     }
                     else {
-                        console.log(res)
+                        console.log(res);
                         expect(res.toString()).to.equal(
-                            "Tue Sep 13 1994 11:33:00 GMT+0200 (IST),"+
-                            "Mon Jul 18 2016 10:00:00 GMT+0300 (IDT),"+
-                            "Mon Jul 18 2016 10:33:00 GMT+0300 (IDT),"+
-                            "Mon Jul 18 2016 10:50:00 GMT+0300 (IDT),"+
+                            "Tue Sep 13 1994 11:33:00 GMT+0200 (IST)," +
+                            "Mon Jul 18 2016 10:00:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 10:33:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 10:50:00 GMT+0300 (IDT)," +
                             "Mon Jul 18 2016 12:33:00 GMT+0300 (IDT)"
                         );
                         done();
                     }
                 });
-
             });
 
+
+
+
+            it("should return the 3 containers sorted by date", function (done) {
+                tools.myread("/containers2.json", function (err, res) {
+                    if (err) {
+                        return done(err);
+                    }
+                    else {
+                        console.log(res);
+                        expect(res.toString()).to.equal(
+                            "Mon Jul 18 2016 10:00:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 10:50:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 12:33:00 GMT+0300 (IDT)"
+                        );
+                        done();
+                    }
+                });
+            });
+//
+            it("should return an array of containers sorted (using lodash) by date if the environment variable USE_LODASH is exsits", function(done){
+                tools.myread("/containers.json", function(err, res){
+                    if (err) {
+                        return done(err);
+                    }
+                    else {
+                        expect(process.env.USE_LODASH).to.not.equal(null);
+                        console.log(res);
+                        expect(res.toString()).to.equal(
+                            "Tue Sep 13 1994 11:33:00 GMT+0200 (IST)," +
+                            "Mon Jul 18 2016 10:00:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 10:33:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 10:50:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 12:33:00 GMT+0300 (IDT)"
+                        );
+                        done();
+                    }
+                });
+            });
+//
         });
 
         describe("negative", function () {
@@ -63,6 +114,29 @@ describe("functions tests", function () {
                     }
                 });
             });
+
+            it("should return an array of containers sorted by date without using lodash if the environment variable USE_LODASH is not exsits", function(done){
+                tools.myread("/containers.json", function(err, res){
+                    if (err) {
+                        return done(err);
+                    }
+                    else {
+                        expect(process.env.USE_LODASH).to.equal(undefined);
+                        console.log(res);
+                        expect(res.toString()).to.equal(
+                            "Tue Sep 13 1994 11:33:00 GMT+0200 (IST)," +
+                            "Mon Jul 18 2016 10:00:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 10:33:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 10:50:00 GMT+0300 (IDT)," +
+                            "Mon Jul 18 2016 12:33:00 GMT+0300 (IDT)"
+                        );
+                        done();
+                    }
+                });
+            });
+
+
+
 
         });
 
