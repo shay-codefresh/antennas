@@ -28,80 +28,7 @@ describe("functions tests", function () {
             });
 
             it("should check if the array of containers amount of 3 objects, creates and deletes file", function (done) {
-                var containers={
-                "container_1": {
-                    "id": "1",
-                        "name": "container 1",
-                        "cpu": 90,
-                        "mem": 60,
-                        "layers": [
-                        "1",
-                        "12",
-                        "123",
-                        "1234",
-                        "12345"
-                    ],
-                        "created": "Mon Jul 18 2016 12:33:00 GMT+0300 (IDT)"
-                },
-                "container_2": {
-                    "id": "2",
-                        "name": "container 2",
-                        "cpu": 70,
-                        "mem": 40,
-                        "layers": [
-                        "1",
-                        "12",
-                        "123",
-                        "1234",
-                        "12345"
-                    ],
-                        "created": "Mon Jul 18 2010 10:50:00 GMT+0300 (IDT)"
-                },
-                "container_3": {
-                    "id": "3",
-                        "name": "container 3",
-                        "cpu": 60,
-                        "mem": 30,
-                        "layers": [
-                        "1",
-                        "12",
-                        "123",
-                        "1234",
-                        "12345"
-                    ],
-                        "created": "Wed Jul 18 2012 10:00:00 GMT+0300 (IDT)"
-                }
-            };
-            var name="test.json";
-                tools.createfile(containers,name,function (error) {
-                    if(error){
-                        return console.log(error);
-                    }
-                    else {
-
-                        tools.myread(name, function (err, res) {
-                            if (err) {
-                                tools.deletetest(name);
-                                return done(err);
-                            }
-                            else {
-
-                                expect(res).to.be.instanceof(Array);
-                                expect(res.length).to.equal(3);
-                                tools.deletetest(name);
-                                done();
-                            }
-                        });
-
-                    }
-                });
-
-            });
-
-
-////*****
-            it("should return if the 3 containers sorted by date , creates and deletes file", function (done) {
-                var containers={
+                var containers = {
                     "container_1": {
                         "id": "1",
                         "name": "container 1",
@@ -145,12 +72,84 @@ describe("functions tests", function () {
                         "created": "Wed Jul 18 2012 10:00:00 GMT+0300 (IDT)"
                     }
                 };
-                var name='test.json'
-                tools.createfile(containers,name,function(error){
-                    if(error){
+                var name = "test.json";
+                tools.createfile(containers, name, function (error) {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    else {
+
+                        tools.myread(name, function (err, res) {
+                            if (err) {
+                                tools.deletetest(name);
+                                return done(err);
+                            }
+                            else {
+
+                                expect(res).to.be.instanceof(Array);
+                                expect(res.length).to.equal(3);
+                                tools.deletetest(name);
+                                done();
+                            }
+                        });
+
+                    }
+                });
+
+            });
+
+
+            it("should return if the 3 containers sorted by date , creates and deletes file", function (done) {
+                var containers = {
+                    "container_1": {
+                        "id": "1",
+                        "name": "container 1",
+                        "cpu": 90,
+                        "mem": 60,
+                        "layers": [
+                            "1",
+                            "12",
+                            "123",
+                            "1234",
+                            "12345"
+                        ],
+                        "created": "Mon Jul 18 2016 12:33:00 GMT+0300 (IDT)"
+                    },
+                    "container_2": {
+                        "id": "2",
+                        "name": "container 2",
+                        "cpu": 70,
+                        "mem": 40,
+                        "layers": [
+                            "1",
+                            "12",
+                            "123",
+                            "1234",
+                            "12345"
+                        ],
+                        "created": "Mon Jul 18 2010 10:50:00 GMT+0300 (IDT)"
+                    },
+                    "container_3": {
+                        "id": "3",
+                        "name": "container 3",
+                        "cpu": 60,
+                        "mem": 30,
+                        "layers": [
+                            "1",
+                            "12",
+                            "123",
+                            "1234",
+                            "12345"
+                        ],
+                        "created": "Wed Jul 18 2012 10:00:00 GMT+0300 (IDT)"
+                    }
+                };
+                var name = 'test.json'
+                tools.createfile(containers, name, function (error) {
+                    if (error) {
                         return console.log(error)
                     }
-                    else{
+                    else {
 
 
                         tools.myread(name, function (err, res) {
@@ -164,14 +163,14 @@ describe("functions tests", function () {
                                     res[i].created = res[i].created.toString();
                                 }
                                 //console.log(res);\
-                                var sorted = [ {
+                                var sorted = [{
                                     "id": "2",
                                     "name": "container 2",
                                     "cpu": 70,
                                     "mem": 40,
                                     "layers": ["1", "12", "123", "1234", "12345"],
                                     "created": "Sun Jul 18 2010 10:50:00 GMT+0300 (IDT)"
-                                },{
+                                }, {
                                     "id": "3",
                                     "name": "container 3",
                                     "cpu": 60,
@@ -198,7 +197,6 @@ describe("functions tests", function () {
                     }
                 });
             });
-///
 
 
             it("should return if the 5 containers sorted by date ", function (done) {
@@ -255,9 +253,9 @@ describe("functions tests", function () {
                     }
                 });
             });
-//
+
             it("should return an array of containers sorted (using lodash) by date if the environment variable USE_LODASH is exsits", function (done) {
-                process.env.USE_LODASH="HRHWHW";
+                process.env.USE_LODASH = "HRHWHW";
                 tools.myread("/containers.json", function (err, res) {
                     if (err) {
                         return done(err);
@@ -265,12 +263,10 @@ describe("functions tests", function () {
                     else {
                         expect(process.env.USE_LODASH).to.not.equal(undefined);
                         expect(tools.getlodashcheck()).to.equal(true);
-//                        console.log(process.env.USE_LODASH);
                         done();
                     }
                 });
             });
-//
         });
 
         describe("negative", function () {
@@ -288,7 +284,7 @@ describe("functions tests", function () {
             });
 
             it("should return an array of containers sorted by date without using lodash if the environment variable USE_LODASH is not exsits", function (done) {
-                process.env.USE_LODASH='';
+                process.env.USE_LODASH = '';
                 tools.myread("/containers.json", function (err, res) {
                     if (err) {
                         return done(err);
@@ -296,7 +292,6 @@ describe("functions tests", function () {
                     else {
                         expect(process.env.USE_LODASH).to.equal('');
                         expect(tools.getlodashcheck()).to.equal(false);
-//                        console.log(process.env.USE_LODASH);
                         done();
                     }
                 });
