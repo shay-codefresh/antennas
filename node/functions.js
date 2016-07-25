@@ -11,24 +11,24 @@ function getlodashcheck() {
 }
 
 function deletetest(name) {
-    fs.unlink(__dirname + '/'+name, function (err) {
+    fs.unlink(__dirname + '/' + name, function (err) {
         if (err) {
             return console.log(err);
         }
     });
 }
 
-function createfile(json,name, callback) {
-    fs.writeFile(__dirname + '/'+name, JSON.stringify(json, null, 2), function (err) {
-            if (err) {
-                return console.log(err);
-            }
-        });
+function createfile(json, name, callback) {
+    fs.writeFile(__dirname + '/' + name, JSON.stringify(json, null, 2), function (err) {
+        if (err) {
+            return console.log(err);
+        }
+    });
     callback(null)
 }
 
 function myread(filename, callback) {
-    lodash_check=false;
+    lodash_check = false;
     fs.readFile(__dirname + '/' + filename, function (err, result) {
         if (err) {
 //check if the path is wrong
