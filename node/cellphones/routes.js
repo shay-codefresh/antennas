@@ -8,7 +8,7 @@ var _ = require('lodash-node');
 
 
 var tools = require('./func');
-
+/*
 function step1() {
     var x1=1;
     var y1=2;
@@ -30,6 +30,7 @@ function step1() {
         }
     })
 }
+*/
 
 function stepone() {
 
@@ -49,3 +50,23 @@ function stepone() {
 }
 
 stepone();
+
+function steptwo(){
+
+    var x1=1;
+    var y1=2;
+    var x2=61;
+    var y2=61;
+
+    tools.phase2("antenna.json",x1,y1,x2,y2, function (err, res) {
+        if(err){
+            return err;
+        }
+        else {
+            console.log(res);
+            return res;
+        }
+    })
+}
+
+steptwo();
