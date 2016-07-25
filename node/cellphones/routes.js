@@ -38,7 +38,7 @@ function stepone() {
     var y1=2;
     var x2=61;
     var y2=61;
-    tools.phase1("antenna.json",x1,y1,x2,y2, function (err, res) {
+    tools.phase1("antenna.json",{x:x1,y:y1},{x:x2,y:y2}, function (err, res) {
         if(err){
             return err;
         }
@@ -58,7 +58,7 @@ function steptwo(){
     var x2=61;
     var y2=61;
 
-    tools.phase2("antenna.json",x1,y1,x2,y2, function (err, res) {
+    tools.phase2("antenna.json",{x:x1,y:y1},{x:x2,y:y2}, function (err, res) {
         if(err){
             return err;
         }
